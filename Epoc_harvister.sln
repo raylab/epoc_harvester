@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epoc_harvister", "Epoc_harvister.csproj", "{EBE916C8-DB35-4E48-9A47-606DE14493FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBE916C8-DB35-4E48-9A47-606DE14493FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE916C8-DB35-4E48-9A47-606DE14493FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE916C8-DB35-4E48-9A47-606DE14493FE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE916C8-DB35-4E48-9A47-606DE14493FE}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {015DE817-862A-4F28-A631-6B80C812B933}
+	EndGlobalSection
+EndGlobal
