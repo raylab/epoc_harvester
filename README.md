@@ -1,2 +1,2 @@
 # epoc_harvester
-This is EPOC+  Websocket 
+This is EPOC+  Data harvister and Websocket Client for Windows.
