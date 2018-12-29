@@ -7,8 +7,6 @@ using System.Windows.Forms;
 using Emotiv;
 using System.Threading;
 using System.Web.Script.Serialization;
-using Fleck;
-
 
 
 namespace Epoc_harvister
@@ -45,7 +43,7 @@ namespace Epoc_harvister
         static void Engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
         {
             userID = (int)e.userId;
-            outputBuffer["userID"] = userID;
+            outputBuffer["UserId"] = userID;
             My_Program.myForm.textBox3.Text = $"Add:{userID}";
         }
         static void Engine_UserRemoved_Event(object sender, EmoEngineEventArgs e)
@@ -258,7 +256,7 @@ namespace Epoc_harvister
                     //My_Program.myForm.textBox1.Text = $"{EdkDll.IEE_FFTGetWindowingType((uint)userID, myWType)}";
                     //My_Program.myEpoc.myEngine.IEE_FFTGetWindowingType((uint)userID, myWType);
                     //My_Program.myForm.textBox1.Text = $"{myWType}";
-                    outputBuffer["type"] = "epoc_raw_buffer";
+                    outputBuffer["Type"] = "EpocRawBuffer";
                     Harvest_EEG_Headset();
                     Harvest_Wavebands_Headset();
                     outputBuffer["EQ"] = electrodeQuality;
@@ -358,7 +356,7 @@ namespace Epoc_harvister
                 bands[i] = band; 
             }
 
-            outputBuffer["bands"] = bands;// new JavaScriptSerializer().Serialize(bands);
+            outputBuffer["Bands"] = bands;// new JavaScriptSerializer().Serialize(bands);
             //myMsg = new JavaScriptSerializer().Serialize(bands);
             //if (My_Program.SRV)
             //{
@@ -378,7 +376,7 @@ namespace Epoc_harvister
                 int bufferSize = data[EdkDll.IEE_DataChannel_t.IED_TIMESTAMP].Length;
                 //Dictionary<string, object> message = new Dictionary<string, object>();
                 Dictionary<string, double>[] frames = new Dictionary<string, double>[bufferSize];
-                outputBuffer["frames"] = frames;
+                outputBuffer["Frames"] = frames;
                 for (int i = 0; i < bufferSize; i++)
                 {
                     Dictionary<string, double> frame = new Dictionary<string, double>();
@@ -393,13 +391,27 @@ namespace Epoc_harvister
                 }
                 //return frames.ToString();
                 //outputBuffer["type"] = "epoc_raw_buffer";
-                //outputBuffer["userID"] = userID;
+                //Console.WriteLine(My_Program.myPics.ElementAt(0));
+                //Console.WriteLine(frame["MARKER"]);
+                //Console.WriteLine(frame["MARKER_HARDWARE"]);   //string.Join("; ", frame));
+                //Console.WriteLine(My_Program.myPics.Any());
+                if (My_Program.myPics.Any() == true)
+                {
+                    outputBuffer["Stim"] = My_Program.myPics.ElementAt(0);
+                    outputBuffer["Stim_time"] = My_Program.stimTime;
+                }
+                else
+                {
+                    outputBuffer.Remove("Stim");
+                    outputBuffer.Remove("Stim_time");
+                }
                 string json = new JavaScriptSerializer().Serialize(outputBuffer);
                 //Json output of the raw EEG harvister.
                 //My_Program.myForm.richTextBox1.Text = json;
                 if (My_Program.SRV)
                 {
-                    My_Program.myServer.Broadcast(json);
+                    //My_Program.myServer.Broadcast(json);
+                    My_Program.myWS.SendWS(json);
                 }
             }
             My_Program.myForm.textBox2.Text = $"Harvisted.";

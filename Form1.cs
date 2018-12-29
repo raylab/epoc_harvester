@@ -89,29 +89,48 @@ namespace Epoc_harvister
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (button2.Text == "Start Server")
+            if (My_Program.myForm.textBox9.Text != "" && My_Program.myForm.textBox10.Text != "")
             {
-                button2.Text = "Stop Server";
-                My_Program.Start_Server();
+                if (button2.Text == "Connect")
+                {
+                    button2.Text = "Disconnect";
+                    My_Program.Start_Server();
+                }
+                else if (button2.Text == "Disconnect")
+                {
+                    button2.Text = "Connect";
+                    My_Program.Stop_Server();
+                }
             }
-            else if (button2.Text == "Stop Server")
+            else
             {
-                button2.Text = "Start Server";
-                My_Program.Stop_Server();
+                MessageBox.Show("You need Log address and Record Number");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (button1.Text == "Start Engine")
+            {
+                MessageBox.Show("You need to start Emo Engine first");
+            }
+            else if (button1.Text == "Stop Engine")
+            {
+                My_Program.Do_license();
             }
             
         }
 
-        private void textBox11_TextChanged(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            My_Program.port = textBox1.Text;
+            My_Program.StartStim();
         }
     }
 }
